@@ -15,9 +15,9 @@ Plug 'easymotion/vim-easymotion'
 Plug 'puremourning/vimspector'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rust-lang/rust.vim'
-Plug 'ghifarit53/tokyonight-vim'
+Plug 'haishanh/night-owl.vim'
 Plug 'dense-analysis/ale'
-Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'guns/vim-clojure-highlight'
 Plug 'guns/vim-clojure-static'
 Plug 'luochen1990/rainbow'
@@ -38,7 +38,6 @@ let g:iced_enable_default_key_mappings = v:true
 syntax on
 filetype plugin indent on
 
-inoremap jj <Esc>
 let g:python_highlight_all = 1
 set completeopt=menu,menuone,popup,noselect,noinsert
 " ==== ALE ====
@@ -82,8 +81,16 @@ map  <C-a> :tabp<CR>
 map  <C-n> :tabnew<CR>
 
 " NERDTree config
+" map nerdtree to the ctrl+n
+function MyNerdToggle()
+    if &filetype == 'nerdtree' || exists("g:NERDTree") && g:NERDTree.IsOpen()
+        :NERDTreeToggle
+    else
+        :NERDTreeFind
+    endif
+endfunction
 let g:NERDTreeQuitOnOpen = 1
-nnoremap <space><space> :NERDTreeFind<CR>
+nnoremap <space><space> :call MyNerdToggle()<CR>
 let g:NERDTreeWinSize=80
 
 hi Pmenu ctermfg=white ctermbg=black gui=NONE guifg=white guibg=black
@@ -93,9 +100,12 @@ set termguicolors
 let g:vimspector_enable_mappings = 'HUMAN'
 set updatetime=100
 
+" StatusLine
+set laststatus=2
+
 " Color settings
-let g:airline_theme = "tokyonight"
-colorscheme tokyonight
+colorscheme night-owl
+let g:lightline = { 'colorscheme': 'nightowl' }
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_map = '<c-p>'
