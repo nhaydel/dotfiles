@@ -9,7 +9,18 @@ local servers = {
   awk_ls = {},
   bashls = {},
   tsserver = {},
-
+  rust_analyzer = {
+    settings = {
+        ['rust-analyzer'] = {
+            check = {
+                command = "clippy";
+            },
+            diagnostics = {
+                enable = true;
+            }
+        }
+    }
+  },
   pyright = {
     settings = {
 

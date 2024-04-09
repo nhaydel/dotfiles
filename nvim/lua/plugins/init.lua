@@ -24,6 +24,9 @@ return {
   		},
   	},
   },
+  {
+    "FabijanZulj/blame.nvim"
+  },
   --
   -- {
   -- 	"nvim-treesitter/nvim-treesitter",
