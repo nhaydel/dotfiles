@@ -1,25 +1,25 @@
 " Set defaults
 set backspace=indent,eol,start
 set nocompatible
-set number
+set relativenumber
+set rnu
 set mouse=a
 call plug#begin()
 Plug 'preservim/NERDTree' " File nav
+Plug 'zivyangll/git-blame.vim'
 " Requires adapter installs:
 " :VimspectorInstall debugpy - for python
 " :VimspectorInstall delve - for go
 " :VimspectorInstall CodeLLDB
 Plug 'machakann/vim-highlightedyank' " Highlight on copy
 Plug 'skammer/vim-css-color' " View css color codes
+Plug 'ayu-theme/ayu-vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'puremourning/vimspector'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rust-lang/rust.vim'
-Plug 'haishanh/night-owl.vim'
 Plug 'dense-analysis/ale'
 Plug 'itchyny/lightline.vim'
-Plug 'guns/vim-clojure-highlight'
-Plug 'guns/vim-clojure-static'
 Plug 'luochen1990/rainbow'
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -27,13 +27,11 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'liuchengxu/vim-which-key'
 Plug 'wellle/context.vim'
 Plug 'junegunn/fzf'
-Plug 'liquidz/vim-iced', {'for': 'clojure'}
-Plug 'liquidz/vim-iced-coc-source', {'for': 'clojure'}
-
-Plug 'guns/vim-sexp',    {'for': 'clojure'}
-Plug 'liquidz/vim-iced', {'for': 'clojure'}
 call plug#end()
 
+" KEYMAPPINGS
+nnoremap gb :<C-u>call gitblame#echo()<CR>
+" END KEYMAPPINGS
 let g:iced_enable_default_key_mappings = v:true
 syntax on
 filetype plugin indent on
@@ -96,19 +94,25 @@ let g:NERDTreeWinSize=80
 hi Pmenu ctermfg=white ctermbg=black gui=NONE guifg=white guibg=black
 set pastetoggle=<F3>
 
-set termguicolors
 let g:vimspector_enable_mappings = 'HUMAN'
 set updatetime=100
 
 " StatusLine
 set laststatus=2
 
+set termguicolors
 " Color settings
-colorscheme night-owl
-let g:lightline = { 'colorscheme': 'nightowl' }
+" let ayucolor="light"  " for light version of theme
+" let ayucolor="mirage" " for mirage version of theme
+let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
+let g:lightline = { 'colorscheme': 'ayu' }
+
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
 
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_map = '<c-p>'
+let g:ctrlp_map = '<c-f>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " Coc config
@@ -116,8 +120,8 @@ let g:coc_disable_startup_warning = 1
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gd :call CocAction('jumpDefinition', 'tabe')<CR>
+nmap <silent> gt <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
