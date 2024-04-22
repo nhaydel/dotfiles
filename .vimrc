@@ -26,10 +26,13 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'liuchengxu/vim-which-key'
 Plug 'wellle/context.vim'
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " KEYMAPPINGS
+nnoremap <space>fw :Rg<CR>
+nnoremap <space>ff :Files<CR>
 nnoremap gb :<C-u>call gitblame#echo()<CR>
 " END KEYMAPPINGS
 let g:iced_enable_default_key_mappings = v:true
