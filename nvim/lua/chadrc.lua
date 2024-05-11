@@ -2,7 +2,7 @@
 local M = {}
 
 M.ui = {
-	theme = "kanagawa",
+	theme = "bearded-arc",
 
 	-- hl_override = {
 	-- 	Comment = { italic = true },
