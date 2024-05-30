@@ -1,4 +1,3 @@
-" Set defaults
 set backspace=indent,eol,start
 set nocompatible
 set relativenumber
@@ -13,13 +12,10 @@ Plug 'zivyangll/git-blame.vim'
 " :VimspectorInstall CodeLLDB
 Plug 'machakann/vim-highlightedyank' " Highlight on copy
 Plug 'skammer/vim-css-color' " View css color codes
-Plug 'ayu-theme/ayu-vim'
-Plug 'easymotion/vim-easymotion'
 Plug 'puremourning/vimspector'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'rust-lang/rust.vim'
 Plug 'dense-analysis/ale'
-Plug 'itchyny/lightline.vim'
+Plug 'ziglang/zig.vim'
 Plug 'luochen1990/rainbow'
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -28,11 +24,14 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'wellle/context.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 call plug#end()
 
 " KEYMAPPINGS
 nnoremap <space>fw :Rg<CR>
 nnoremap <space>ff :Files<CR>
+nnoremap <space>fb :Buffers<CR>
 nnoremap gb :<C-u>call gitblame#echo()<CR>
 " END KEYMAPPINGS
 let g:iced_enable_default_key_mappings = v:true
@@ -103,22 +102,16 @@ set updatetime=100
 " StatusLine
 set laststatus=2
 
+" Colors
 set termguicolors
-" Color settings
-" let ayucolor="light"  " for light version of theme
-" let ayucolor="mirage" " for mirage version of theme
-let ayucolor="dark"   " for dark version of theme
-colorscheme ayu
-let g:lightline = { 'colorscheme': 'ayu' }
-
-let g:tokyonight_style = 'night' " available: night, storm
-let g:tokyonight_enable_italic = 1
+colorscheme sorbet
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_map = '<c-f>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " Coc config
+let g:coc_global_extensions = ['coc-zig', 'coc-json', 'coc-go', 'coc-tsserver']
 let g:coc_disable_startup_warning = 1
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
@@ -130,3 +123,6 @@ nmap <silent> gr <Plug>(coc-references)
 
 " highlight config
 let g:highlightedyank_highlight_duration = 100
+
+" StatusLine
+set stl=%n\:%f%r%m\ \|%{&ff}\/%{&fenc}\|\ \|%l\:%c\/%L\L\|\ %{strftime('%H:%M')}
