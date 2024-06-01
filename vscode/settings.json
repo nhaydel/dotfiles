@@ -1,0 +1,42 @@
+{
+    "workbench.colorTheme": "Flate Arc Bold",
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "workbench.preferredDarkColorTheme": "Tokyo Night AltSynt",
+    "workbench.statusBar.visible": true,
+    "editor.rulers": [120],
+    "editor.minimap.enabled": false,
+    "editor.lineNumbers": "relative",
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.startupEditor": "none",
+    "remote.autoForwardPortsSource": "hybrid",
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "vim.leader": " ",
+    "vim.statusBarColors.normal": "",
+    "vim.vimrc.enable": true,
+    "vim.highlightedyank.enable": true,
+    "vim.normalModeKeyBindings": [
+        {
+          "before" : ["g","d"],
+          "commands" : [
+            "editor.action.revealDefinition"
+          ]
+        },
+        {
+          "before" : ["g","r"],
+          "commands" : [
+            "references-view.findReferences"
+          ]
+        },
+
+      ],
+      "zig.initialSetupDone": true,
+      "zig.path": "zig",
+      "zig.zls.path": "/Users/nic/Library/Application Support/Code/User/globalStorage/ziglang.vscode-zig/zls_install/zls",
+      "telemetry.telemetryLevel": "off",
+      "settingsSync.ignoredExtensions": [
+
+      ]
+}
