@@ -1,15 +1,18 @@
 set backspace=indent,eol,start
 set nocompatible
 set relativenumber
+set number
 set rnu
 set mouse=a
 call plug#begin()
 Plug 'preservim/NERDTree' " File nav
 Plug 'zivyangll/git-blame.vim'
+Plug 'bluz71/vim-nightfly-colors', { 'as': 'nightfly' }
 " Requires adapter installs:
 " :VimspectorInstall debugpy - for python
 " :VimspectorInstall delve - for go
 " :VimspectorInstall CodeLLDB
+Plug 'itchyny/lightline.vim'
 Plug 'machakann/vim-highlightedyank' " Highlight on copy
 Plug 'skammer/vim-css-color' " View css color codes
 Plug 'puremourning/vimspector'
@@ -104,7 +107,8 @@ set laststatus=2
 
 " Colors
 set termguicolors
-colorscheme sorbet
+set background=dark
+colorscheme nightfly
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_map = '<c-f>'
@@ -125,4 +129,7 @@ nmap <silent> gr <Plug>(coc-references)
 let g:highlightedyank_highlight_duration = 100
 
 " StatusLine
-set stl=%n\:%f%r%m\ \|%{&ff}\/%{&fenc}\|\ \|%l\:%c\/%L\L\|\ %{strftime('%H:%M')}
+let g:lightline = {
+      \ 'colorscheme': 'nightfly',
+      \ }
+
