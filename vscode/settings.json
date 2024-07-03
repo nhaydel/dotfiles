@@ -27,7 +27,7 @@
         {
           "before" : ["g","r"],
           "commands" : [
-            "references-view.findReferences"
+            "editor.action.goToReferences"
           ]
         },
 
@@ -38,5 +38,6 @@
       "telemetry.telemetryLevel": "off",
       "settingsSync.ignoredExtensions": [
 
-      ]
+      ],
+      "editor.fontLigatures": false
 }

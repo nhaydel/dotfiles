@@ -58,7 +58,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.wo.number = true
 vim.opt.rtp:prepend(lazypath)
-
+vim.opt.number = true
+vim.opt.relativenumber = true
 -- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
 --
@@ -128,16 +129,16 @@ require('lazy').setup({
     },
   },
   {
-    "tiagovla/tokyodark.nvim",
-    opts = {
-      custom_palette = {
-        fg = "#c0caf5"
-      }
-    },
-    config = function(_, opts)
-        require("tokyodark").setup(opts) -- calling setup is optional
-        vim.cmd [[colorscheme tokyodark]]
+    {
+      "oxfist/night-owl.nvim",
+      lazy = false, -- make sure we load this during startup if it is your main colorscheme
+      priority = 1000, -- make sure to load this before all the other start plugins
+      config = function()
+      -- load the colorscheme here
+      require("night-owl").setup()
+      vim.cmd.colorscheme("night-owl")
     end,
+    }
   },
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -148,7 +149,7 @@ require('lazy').setup({
         theme = 'auto',
         component_separators = '|',
         section_separators = '',
-        colorscheme = 'tokyodark'
+        colorscheme = 'night-owl'
       },
     },
   },
@@ -293,7 +294,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 require("devcontainer").setup{}
-
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
@@ -701,7 +701,7 @@ require('nvim-treesitter.configs').setup {
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 vim.keymap.set('n', '<C-n>', ":tabnew<CR>", { desc = "New tabnext" })
 vim.keymap.set('n', '<C-l>', ":tabn<CR>", { desc = "Go to next tab" })
-vim.keymap.set('n', '<C-a>', ":tabn<CR>", { desc = "Go to previous tab" })
+vim.keymap.set('n', '<C-a>', ":tabp<CR>", { desc = "Go to previous tab" })
 vim.keymap.set('n', '<C-c>', ":tabclose<CR>", { desc = "Close current tab" })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
@@ -727,7 +727,7 @@ local on_attach = function(_, bufnr)
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
-  nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+  vim.keymap.set('n', 'gd', function() require('telescope.builtin').lsp_definitions({ jump_type = 'tab', reuse_win = true }) end, { desc = 'LSP: [G]oto [D]efinition'})
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gl', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('<leader>td', vim.lsp.buf.type_definition, 'Type [D]efinition')
@@ -808,20 +808,14 @@ mason_lspconfig.setup_handlers {
 	  python = {
 	    analysis = {
 	      autoSearchPaths = true,
-	      diagnosticMode = 'openFilesOnly',
 	      useLibraryCodeForTypes = true,
-	      typeCheckingMode = 'off'
+	      typeCheckingMode = 'off',
+              lineLength = 120
 	     }
 	   }
 	 }
       }
   end,
-  ["rust_analyzer"] = function()
-    require("lspconfig")["rust_analyzer"].setup {}
-  end,
-  ["clojure_lsp"] = function()
-    require("lspconfig")["clojure_lsp"].setup {}
-  end
 }
 
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
