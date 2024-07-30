@@ -72,11 +72,12 @@ require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
-
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
   'Olical/conjure',
   'hiphish/rainbow-delimiters.nvim',
+  -- Colorscheme
+  'fenetikm/falcon',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -128,18 +129,6 @@ require('lazy').setup({
       },
     },
   },
-  {
-    {
-      "oxfist/night-owl.nvim",
-      lazy = false, -- make sure we load this during startup if it is your main colorscheme
-      priority = 1000, -- make sure to load this before all the other start plugins
-      config = function()
-      -- load the colorscheme here
-      require("night-owl").setup()
-      vim.cmd.colorscheme("night-owl")
-    end,
-    }
-  },
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
@@ -149,7 +138,7 @@ require('lazy').setup({
         theme = 'auto',
         component_separators = '|',
         section_separators = '',
-        colorscheme = 'night-owl'
+        colorscheme = 'falcon'
       },
     },
   },
@@ -210,31 +199,12 @@ require('lazy').setup({
       pcall(require('nvim-treesitter.install').update { with_sync = true })
     end,
   },
-  {
-    'https://codeberg.org/esensar/nvim-dev-container',
-    dependencies = 'nvim-treesitter/nvim-treesitter'
-  },
-
-  -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
-  --       These are some example plugins that I've included in the kickstart repository.
-  --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
-
-  -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
-  --    up-to-date with whatever is in the kickstart repo.
-  --
-  --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  --
-  --    An additional note is that if you only copied in the `init.lua`, you can just comment this line
-  --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
---  { import = 'custom.plugins' },
 }, {})
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
+vim.cmd "colorscheme falcon"
 -- Set highlight on search
 vim.o.hlsearch = false
 
@@ -293,7 +263,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
-require("devcontainer").setup{}
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
@@ -594,6 +563,7 @@ require('gitsigns').setup(
     -- Actions
     map('n', '<leader>hs', gs.stage_hunk)
     map('n', '<leader>hr', gs.reset_hunk)
+    map('n', '<leader>hn', gs.reset_hunk)
     map('v', '<leader>hs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
     map('v', '<leader>hr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
     map('n', '<leader>hS', gs.stage_buffer)
@@ -635,7 +605,7 @@ vim.keymap.set('n', '<leader>vt', ":call vimspector#ToggleBreakpoint()<cr>", { d
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'clojure', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'json' },
+  ensure_installed = { 'clojure', 'go', 'lua', 'python', 'zig', 'tsx', 'typescript', 'vimdoc', 'vim', 'json' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -822,7 +792,6 @@ vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
 -- nvim-cmp setup
 --
-local cmp = require('cmp')
 local luasnip = require 'luasnip'
 
 luasnip.config.setup {}
