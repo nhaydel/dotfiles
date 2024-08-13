@@ -4,15 +4,16 @@ set relativenumber
 set number
 set rnu
 set mouse=a
+set hlsearch
+set incsearch
 call plug#begin()
 Plug 'preservim/NERDTree' " File nav
 Plug 'zivyangll/git-blame.vim'
-Plug 'bluz71/vim-nightfly-colors', { 'as': 'nightfly' }
+Plug 'fenetikm/falcon'
 " Requires adapter installs:
 " :VimspectorInstall debugpy - for python
 " :VimspectorInstall delve - for go
 " :VimspectorInstall CodeLLDB
-Plug 'itchyny/lightline.vim'
 Plug 'machakann/vim-highlightedyank' " Highlight on copy
 Plug 'skammer/vim-css-color' " View css color codes
 Plug 'puremourning/vimspector'
@@ -28,9 +29,11 @@ Plug 'wellle/context.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'vim-python/python-syntax'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 call plug#end()
 
+" let g:python_highlight_all = 1
 " KEYMAPPINGS
 nnoremap <space>fw :Rg<CR>
 nnoremap <space>ff :Files<CR>
@@ -108,7 +111,7 @@ set laststatus=2
 " Colors
 set termguicolors
 set background=dark
-colorscheme nightfly
+colorscheme falcon
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_map = '<c-f>'
@@ -129,7 +132,22 @@ nmap <silent> gr <Plug>(coc-references)
 let g:highlightedyank_highlight_duration = 100
 
 " StatusLine
-let g:lightline = {
-      \ 'colorscheme': 'nightfly',
-      \ }
+function! UpdateGitBranch()
+  let l:string = system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+  return strlen(l:string) > 0?'['.l:string.']':''
+endfunction
+let g:gitparsedbranchname = UpdateGitBranch()
 
+set statusline=
+set statusline+=%#PmenuSel#
+set statusline+=%{g:gitparsedbranchname}
+set statusline+=%#LineNr#
+set statusline+=\ %f
+set statusline+=%m
+set statusline+=%=
+set statusline+=%#CursorColumn#
+set statusline+=\ %y
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\[%{&fileformat}\]
+set statusline+=\ %p%%
+set statusline+=\ %l:%c
