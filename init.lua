@@ -732,9 +732,9 @@ vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = "#e8ad0c"} )
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   gopls = {},
-  pyright = {},
+  jedi = {},
+  clangd = {},
   tsserver = {},
-  zls = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -767,24 +767,6 @@ mason_lspconfig.setup_handlers {
       on_attach = on_attach,
       settings = servers[server_name],
     }
-  end,
-  ["pyright"] = function()
-      require("lspconfig")["pyright"].setup {
-        on_attach = on_attach,
-	settings = {
-	  pyright = {
-	    autoImportCompletion = true,
-	  },
-	  python = {
-	    analysis = {
-	      autoSearchPaths = true,
-	      useLibraryCodeForTypes = true,
-	      typeCheckingMode = 'off',
-              lineLength = 120
-	     }
-	   }
-	 }
-      }
   end,
 }
 
