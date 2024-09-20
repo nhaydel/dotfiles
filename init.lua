@@ -69,6 +69,7 @@ vim.opt.relativenumber = true
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
   'puremourning/vimspector',
+  'nvim-treesitter/nvim-treesitter-context',
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
@@ -77,7 +78,7 @@ require('lazy').setup({
   'Olical/conjure',
   'hiphish/rainbow-delimiters.nvim',
   -- Colorscheme
-  'fenetikm/falcon',
+  'marko-cerovac/material.nvim',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -138,7 +139,6 @@ require('lazy').setup({
         theme = 'auto',
         component_separators = '|',
         section_separators = '',
-        colorscheme = 'falcon'
       },
     },
   },
@@ -203,8 +203,8 @@ require('lazy').setup({
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
-
-vim.cmd "colorscheme falcon"
+vim.g.material_style = 'deep ocean'
+vim.cmd 'colorscheme material'
 -- Set highlight on search
 vim.o.hlsearch = false
 
@@ -276,6 +276,20 @@ require('telescope').setup {
   },
 }
 
+require('treesitter-context').setup{
+  enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+  max_lines = 2, -- How many lines the window should span. Values <= 0 mean no limit.
+  min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+  line_numbers = true,
+  multiline_threshold = 3, -- Maximum number of lines to show for a single context
+  trim_scope = 'inner', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+  mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
+  -- Separator between context and content. Should be a single character string, like '-'.
+  -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+  separator = '-',
+  zindex = 20, -- The Z-index of the context window
+  on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+}
 -- NeoTree config
 require("neo-tree").setup({
   event_handlers= {
