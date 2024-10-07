@@ -79,6 +79,17 @@ require('lazy').setup({
   'hiphish/rainbow-delimiters.nvim',
   -- Colorscheme
   'marko-cerovac/material.nvim',
+  {
+    "Zeioth/neon.nvim",
+    opts = {
+      dim_inactive = false,
+      styles = {
+        comments = { italic = true },
+        keywords = { italic = true },
+      },
+    }
+  },
+
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -204,7 +215,7 @@ require('lazy').setup({
 -- [[ Setting options ]]
 -- See `:help vim.o`
 vim.g.material_style = 'deep ocean'
-vim.cmd 'colorscheme material'
+vim.cmd 'colorscheme neon-cherrykiss-night'
 -- Set highlight on search
 vim.o.hlsearch = false
 
