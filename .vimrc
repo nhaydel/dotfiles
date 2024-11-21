@@ -9,7 +9,7 @@ set incsearch
 call plug#begin()
 Plug 'preservim/NERDTree' " File nav
 Plug 'zivyangll/git-blame.vim'
-Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+Plug 'fenetikm/falcon'
 " Requires adapter installs:
 " :VimspectorInstall debugpy - for python
 " :VimspectorInstall delve - for go
@@ -110,9 +110,7 @@ set laststatus=2
 
 " Colors
 set termguicolors
-let g:material_terminal_italics = 1
-let g:material_theme_style = 'lighter-community'
-colorscheme material
+colorscheme falcon
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_map = '<c-f>'
