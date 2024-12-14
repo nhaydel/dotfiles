@@ -11,6 +11,8 @@ Plug 'preservim/NERDTree' " File nav
 Plug 'zivyangll/git-blame.vim'
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'hzchirs/vim-material',
+Plug 'cocopon/iceberg.vim',
+" Plug 'vv9k/bogster'
 " Plug 'fenetikm/falcon'
 " Requires adapter installs:
 " :VimspectorInstall debugpy - for python
@@ -113,9 +115,9 @@ set laststatus=2
 " Colors
 set termguicolors
 " colorscheme falcon
-let g:material_style='oceanic'
+let g:material_theme_style='ocean'
 set background=dark
-colorscheme vim-material
+colorscheme iceberg
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_map = '<c-f>'
