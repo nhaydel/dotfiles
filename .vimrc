@@ -124,7 +124,7 @@ let g:ctrlp_map = '<c-f>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " Coc config
-let g:coc_global_extensions = ['coc-zig', 'coc-json', 'coc-go', 'coc-tsserver']
+let g:coc_global_extensions = ['coc-zig', 'coc-json', 'coc-go', 'coc-tsserver', 'coc-clangd']
 let g:coc_disable_startup_warning = 1
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
