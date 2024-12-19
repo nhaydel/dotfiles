@@ -68,7 +68,6 @@ vim.opt.relativenumber = true
 
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
-  'puremourning/vimspector',
   'nvim-treesitter/nvim-treesitter-context',
   -- Git related plugins
   'tpope/vim-fugitive',
@@ -79,6 +78,7 @@ require('lazy').setup({
   'hiphish/rainbow-delimiters.nvim',
   -- Colorscheme
   'marko-cerovac/material.nvim',
+  'Olical/conjure',
   {
     "Zeioth/neon.nvim",
     opts = {
@@ -311,13 +311,20 @@ require("neo-tree").setup({
           require("neo-tree").close_all()
           require("neo-tree.command").execute({ action = "close" })
       end
+    },
+    {
+      event = "neo_tree_popup_input_ready",
+      ---@param args { bufnr: integer, winid: integer }
+      handler = function(args)
+        vim.cmd("stopinsert")
+        vim.keymap.set("i", "<esc>", vim.cmd.stopinsert, { noremap = true, buffer = args.bufnr })
+      end,
     }
   },
   close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
   popup_border_style = "rounded",
   enable_git_status = true,
   enable_diagnostics = true,
-  enable_normal_mode_for_inputs = false, -- Enable normal mode for input dialogs.
   open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
   sort_case_insensitive = false, -- used when sorting files and directories in the tree 
   default_component_configs = {
@@ -757,9 +764,12 @@ vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = "#e8ad0c"} )
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   gopls = {},
-  jedi = {},
   clangd = {},
   tsserver = {},
+  zls = {},
+  ruff = {},
+  pyright = {},
+
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
