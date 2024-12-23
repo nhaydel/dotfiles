@@ -4,6 +4,7 @@ theme = "poimandres"
 line-number = "relative"
 mouse = true
 bufferline = "always"
+true-color = true
 
 
 [editor.cursor-shape]
