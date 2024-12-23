@@ -28,3 +28,17 @@ reportMissingTypeStubs = false
 [language-server.pyright.config.python.analysis]
 typeCheckingMode="off"
 autoImportCompletions = true
+
+[[language]]
+name = "typescript"
+language-servers = [ { name = "efm-lsp-prettier", only-features = [ "format" ] }, "typescript-language-server" ]
+
+[[language]]
+name = "zig"
+file-types = ["zig", "zon"]
+language-servers = [ "zls" ]
+
+[[language]]
+name = "c"
+file-types = ["c", "h"]
+language-servers = [ "clangd" ]
