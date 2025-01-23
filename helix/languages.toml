@@ -40,5 +40,8 @@ language-servers = [ "zls" ]
 
 [[language]]
 name = "c"
-file-types = ["c", "h"]
+file-types = ["c", "h", "cpp", "cc", "hpp", "hh"]
 language-servers = [ "clangd" ]
+
+[language-server.clangd.config]
+fallbackFlags = ["-std=c++20"]

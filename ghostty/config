@@ -1,0 +1,8 @@
+theme = ForestBlue
+cursor-color = #ff0078
+window-title-font-family="Symbols Nerd Font Mono"
+
+font-family="Symbols Nerd Font Mono"
+font-size=20
+font-feature=-liga
+font-thicken=true
