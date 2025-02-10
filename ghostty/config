@@ -1,8 +1,11 @@
-theme = ForestBlue
-cursor-color = #ff0078
-window-title-font-family="Symbols Nerd Font Mono"
+keybind = ctrl+a>n=new_tab
+keybind = ctrl+a>x=close_tab
+keybind = ctrl+a>right=next_tab
+keybind = ctrl+a>left=next_tab
+keybind = ctrl+a>v=new_split:right
+keybind = ctrl+a>h=new_split:down
+keybind = alt+left=goto_split:left
+keybind = alt+right=goto_split:right
+keybind = alt+up=goto_split:up
+keybind = alt+down=goto_split:down
 
-font-family="Symbols Nerd Font Mono"
-font-size=20
-font-feature=-liga
-font-thicken=true
