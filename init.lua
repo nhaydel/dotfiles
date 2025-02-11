@@ -77,17 +77,14 @@ require('lazy').setup({
   'Olical/conjure',
   'hiphish/rainbow-delimiters.nvim',
   -- Colorscheme
-  'marko-cerovac/material.nvim',
   'Olical/conjure',
   {
-    "Zeioth/neon.nvim",
-    opts = {
-      dim_inactive = false,
-      styles = {
-        comments = { italic = true },
-        keywords = { italic = true },
-      },
-    }
+    'AlexvZyl/nordic.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+        require('nordic').load()
+    end
   },
 
 
@@ -214,8 +211,7 @@ require('lazy').setup({
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
-vim.g.material_style = 'deep ocean'
-vim.cmd 'colorscheme neon-cherrykiss-night'
+vim.cmd 'colorscheme nordic'
 -- Set highlight on search
 vim.o.hlsearch = false
 
@@ -703,7 +699,7 @@ require('nvim-treesitter.configs').setup {
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 vim.keymap.set('n', '<C-n>', ":tabnew<CR>", { desc = "New tabnext" })
 vim.keymap.set('n', '<C-l>', ":tabn<CR>", { desc = "Go to next tab" })
-vim.keymap.set('n', '<C-a>', ":tabp<CR>", { desc = "Go to previous tab" })
+vim.keymap.set('n', '<C-j>', ":tabp<CR>", { desc = "Go to previous tab" })
 vim.keymap.set('n', '<C-c>', ":tabclose<CR>", { desc = "Close current tab" })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
