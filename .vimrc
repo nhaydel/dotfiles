@@ -6,6 +6,7 @@ set rnu
 set mouse=a
 set hlsearch
 set incsearch
+
 call plug#begin()
 Plug 'preservim/NERDTree' " File nav
 Plug 'zivyangll/git-blame.vim'
@@ -35,6 +36,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'vim-python/python-syntax'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'guns/vim-sexp',    {'for': 'clojure'}
+Plug 'liquidz/vim-iced', {'for': 'clojure'}
 call plug#end()
 
 " let g:python_highlight_all = 1
@@ -44,7 +47,10 @@ nnoremap <space>ff :Files<CR>
 nnoremap <space>fb :Buffers<CR>
 nnoremap gb :<C-u>call gitblame#echo()<CR>
 " END KEYMAPPINGS
+"
+" ICED setup
 let g:iced_enable_default_key_mappings = v:true
+:command Clay IcedEval (require '[scicloj.clay.v2.api :as clay]) (clay/make! {:source-path "notebooks/index.clj"})
 syntax on
 filetype plugin indent on
 
@@ -84,10 +90,10 @@ set shiftwidth=4
 set expandtab
 
 " tab controls
-map  <C-l> :tabn<CR>
+map  <C-k> :tabn<CR>
 map  <C-c> :tabc<CR>
 map  <C-t> :term<CR>
-map  <C-a> :tabp<CR>
+map  <C-j> :tabp<CR>
 map  <C-n> :tabnew<CR>
 
 " NERDTree config
@@ -124,7 +130,7 @@ let g:ctrlp_map = '<c-f>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " Coc config
-let g:coc_global_extensions = ['coc-zig', 'coc-json', 'coc-go', 'coc-tsserver', 'coc-clangd']
+let g:coc_global_extensions = ['coc-zig', 'coc-json', 'coc-go', 'coc-tsserver', 'coc-clangd', 'coc-clojure', 'coc-python']
 let g:coc_disable_startup_warning = 1
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
