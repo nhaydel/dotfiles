@@ -6,13 +6,14 @@ set rnu
 set mouse=a
 set hlsearch
 set incsearch
-
+set re=0
 call plug#begin()
 Plug 'preservim/NERDTree' " File nav
 Plug 'zivyangll/git-blame.vim'
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'hzchirs/vim-material',
 Plug 'cocopon/iceberg.vim',
+Plug 'w0ng/vim-hybrid',
 " Plug 'vv9k/bogster'
 " Plug 'fenetikm/falcon'
 " Requires adapter installs:
@@ -122,15 +123,16 @@ set laststatus=2
 set termguicolors
 " colorscheme falcon
 let g:material_theme_style='ocean'
+let ayucolor="mirage"
 set background=dark
-colorscheme iceberg
+colorscheme hybrid
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_map = '<c-f>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " Coc config
-let g:coc_global_extensions = ['coc-zig', 'coc-json', 'coc-go', 'coc-tsserver', 'coc-clangd', 'coc-clojure', 'coc-python']
+let g:coc_global_extensions = ['coc-zig', 'coc-json', 'coc-go', 'coc-tsserver', 'coc-clangd', 'coc-clojure', 'coc-pyright']
 let g:coc_disable_startup_warning = 1
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
