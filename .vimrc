@@ -42,6 +42,7 @@ Plug 'liquidz/vim-iced', {'for': 'clojure'}
 call plug#end()
 
 " let g:python_highlight_all = 1
+let mapleader = " "
 " KEYMAPPINGS
 nnoremap <space>fw :Rg<CR>
 nnoremap <space>ff :Files<CR>
@@ -121,11 +122,10 @@ set laststatus=2
 
 " Colors
 set termguicolors
-" colorscheme falcon
 let g:material_theme_style='ocean'
 let ayucolor="mirage"
 set background=dark
-colorscheme hybrid
+colorscheme iceberg
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_map = '<c-f>'
