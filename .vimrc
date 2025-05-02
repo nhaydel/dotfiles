@@ -11,11 +11,8 @@ call plug#begin()
 Plug 'preservim/NERDTree' " File nav
 Plug 'zivyangll/git-blame.vim'
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
-Plug 'hzchirs/vim-material',
-Plug 'cocopon/iceberg.vim',
-Plug 'w0ng/vim-hybrid',
 " Plug 'vv9k/bogster'
-" Plug 'fenetikm/falcon'
+Plug 'fenetikm/falcon'
 " Requires adapter installs:
 " :VimspectorInstall debugpy - for python
 " :VimspectorInstall delve - for go
@@ -47,6 +44,8 @@ let mapleader = " "
 nnoremap <space>fw :Rg<CR>
 nnoremap <space>ff :Files<CR>
 nnoremap <space>fb :Buffers<CR>
+nnoremap <space>cc :IcedConnect<CR>
+nnoremap <space>e  :IcedEvalAtMark<CR>
 nnoremap gb :<C-u>call gitblame#echo()<CR>
 " END KEYMAPPINGS
 "
@@ -97,6 +96,11 @@ map  <C-c> :tabc<CR>
 map  <C-t> :term<CR>
 map  <C-j> :tabp<CR>
 map  <C-n> :tabnew<CR>
+map  <C-v> :vsp<CR>
+map  <C-b> :vertical resize +1<CR>
+
+nmap <silent> <C-h> :wincmd h<CR>
+nmap <silent> <C-l> :wincmd l<CR>
 
 " NERDTree config
 " map nerdtree to the ctrl+n
@@ -122,10 +126,8 @@ set laststatus=2
 
 " Colors
 set termguicolors
-let g:material_theme_style='ocean'
-let ayucolor="mirage"
 set background=dark
-colorscheme iceberg
+colorscheme falcon
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_map = '<c-f>'
