@@ -1,9 +1,0 @@
-inherits = "night_owl"
-
-'keyword.control.import' = { fg = 'green' }
-'keyword.control.return' = { fg = 'pink' }
-'comment' = { fg = 'slate' }
-'variable.builtin' = { fg = 'green' }
-
-[palette]
-background = '#02121f'
