@@ -1,0 +1,49 @@
+theme = "nightfox"
+
+[editor]
+line-number = "relative"
+mouse = true
+bufferline = "always"
+true-color = true
+
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[keys.normal]
+C-r = ":config-reload" # Maps Ctrl-o to opening of the helix config file
+a = "move_char_left" # Maps the 'a' key to the move_char_left command
+w = "move_line_up" # Maps the 'w' key move_line_up
+C-n = ":new"
+C-j = ":buffer-previous"
+C-l = ":buffer-next"
+C-x = ":buffer-close"
+C-p = "@:sh "
+# Select the current word
+W = "@miw"
+# Move to inside the previous parenthesis
+H = "@F)mi("
+# Move to inside the next parenthesis
+L = "@f(mi("
+
+[keys.normal."'"]
+
+_ = "@ File Management\n"
+
+b = ":echo %sh{git blame --date=short -L %{cursor_line},+1 %{buffer_name} | sed -E 's/[0-9]+).*//' | sed 's/(//g'}"
+t = "@:sh touch <C-r>%"
+r = "@:sh rm <C-r>%"
+e = "@:sh mkdir <C-r>%"
+w = "@:sh mv <C-r>% <C-r>%"
+c = "@:sh cp <C-r>% <C-r>%"
+
+[keys.normal." "]
+
+_ = "@ Commands\n"
+
+"space"="file_explorer_in_current_buffer_directory"
