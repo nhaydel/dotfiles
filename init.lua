@@ -763,9 +763,7 @@ local servers = {
   clangd = {},
   tsserver = {},
   zls = {},
-  ruff = {},
   pyright = {},
-
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -773,6 +771,12 @@ local servers = {
     },
   },
 }
+
+vim.lsp.config('gopls', {})
+vim.lsp.config('zls', {})
+vim.lsp.config('clangd', {})
+vim.lsp.config('pyright', {})
+vim.lsp.config('tsserver', {})
 
 -- Setup neovim lua configuration
 require('neodev').setup()
@@ -791,15 +795,15 @@ mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
 }
 
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-    }
-  end,
-}
+-- mason_lspconfig.setup_handlers {
+--  function(server_name)
+--    require('lspconfig')[server_name].setup {
+--      capabilities = capabilities,
+--      on_attach = on_attach,
+--      settings = servers[server_name],
+--    }
+--  end,
+--}
 
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
