@@ -42,6 +42,7 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.vimspector_enable_mappings='HUMAN'
+vim.opt.showtabline = 0
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -74,7 +75,6 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
-  'Olical/conjure',
   'hiphish/rainbow-delimiters.nvim',
   -- Colorscheme
   'Olical/conjure',
@@ -86,8 +86,7 @@ require('lazy').setup({
         require('nordic').load()
     end
   },
-
-
+  'jiangmiao/auto-pairs',
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   { -- LSP Configuration & Plugins
@@ -270,6 +269,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
+vim.g["conjure#client#clojure#nrepl_cmd"] = "clj -M:nrepl"
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
@@ -389,7 +389,7 @@ require("neo-tree").setup({
     commands = {} -- Add a custom command or override a global one using the same function name
   },
   window = {
-    position = "left",
+    position = "float",
     width = 80,
     mapping_options = {
       noremap = true,
@@ -705,6 +705,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 vim.keymap.set('n', '<leader><leader>', ":Neotree toggle<CR>")
+vim.keymap.set('n', '<leader>b', ":Buffers<CR>")
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
@@ -777,6 +778,7 @@ vim.lsp.config('zls', {})
 vim.lsp.config('clangd', {})
 vim.lsp.config('pyright', {})
 vim.lsp.config('tsserver', {})
+vim.lsp.config('clojure_lsp', {})
 
 -- Setup neovim lua configuration
 require('neodev').setup()
@@ -795,15 +797,15 @@ mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
 }
 
--- mason_lspconfig.setup_handlers {
---  function(server_name)
---    require('lspconfig')[server_name].setup {
---      capabilities = capabilities,
---      on_attach = on_attach,
---      settings = servers[server_name],
---    }
---  end,
---}
+mason_lspconfig.setup_handlers {
+  function(server_name)
+    require('lspconfig')[server_name].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = servers[server_name],
+    }
+  end,
+}
 
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
