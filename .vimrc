@@ -10,9 +10,10 @@ set re=0
 call plug#begin()
 Plug 'preservim/NERDTree' " File nav
 Plug 'zivyangll/git-blame.vim'
-Plug 'kaicataldo/material.vim', { 'branch': 'main' }
-" Plug 'vv9k/bogster'
-Plug 'fenetikm/falcon'
+" Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+Plug 'vv9k/bogster'
+Plug 'whatyouhide/vim-gotham'
+" Plug 'audibleblink/hackthebox.vim'
 " Requires adapter installs:
 " :VimspectorInstall debugpy - for python
 " :VimspectorInstall delve - for go
@@ -31,27 +32,29 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'wellle/context.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'antoinemadec/coc-fzf'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'vim-python/python-syntax'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'guns/vim-sexp',    {'for': 'clojure'}
 Plug 'liquidz/vim-iced', {'for': 'clojure'}
 call plug#end()
+:set showtabline=0
 
 " let g:python_highlight_all = 1
 let mapleader = " "
 " KEYMAPPINGS
 nnoremap <space>fw :Rg<CR>
 nnoremap <space>ff :Files<CR>
-nnoremap <space>fb :Buffers<CR>
+nnoremap <space>bb :Buffers<CR>
 nnoremap <space>cc :IcedConnect<CR>
-nnoremap <space>e  :IcedEvalAtMark<CR>
 nnoremap gb :<C-u>call gitblame#echo()<CR>
 " END KEYMAPPINGS
 "
 " ICED setup
 let g:iced_enable_default_key_mappings = v:true
 :command Clay IcedEval (require '[scicloj.clay.v2.api :as clay]) (clay/make! {:source-path "notebooks/index.clj"})
+:command IcedRepl !zellij run --floating -- iced repl; zellij action focus-previous-pane
 syntax on
 filetype plugin indent on
 
@@ -91,10 +94,10 @@ set shiftwidth=4
 set expandtab
 
 " tab controls
-map  <C-k> :tabn<CR>
-map  <C-c> :tabc<CR>
+map  <C-k> :bn<CR>
+map  <C-c> :bd<CR>
 map  <C-t> :term<CR>
-map  <C-j> :tabp<CR>
+map  <C-j> :bp<CR>
 map  <C-n> :tabnew<CR>
 map  <C-v> :vsp<CR>
 map  <C-b> :vertical resize +1<CR>
@@ -114,6 +117,7 @@ endfunction
 let g:NERDTreeQuitOnOpen = 1
 nnoremap <space><space> :call MyNerdToggle()<CR>
 let g:NERDTreeWinSize=80
+ let g:NERDTreeWinPos = "right"
 
 hi Pmenu ctermfg=white ctermbg=black gui=NONE guifg=white guibg=black
 set pastetoggle=<F3>
@@ -125,9 +129,9 @@ set updatetime=100
 set laststatus=2
 
 " Colors
-set termguicolors
 set background=dark
-colorscheme falcon
+colorscheme gotham
+set termguicolors
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_map = '<c-f>'
@@ -142,7 +146,12 @@ inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
 nmap <silent> gd :call CocAction('jumpDefinition', 'tabe')<CR>
 nmap <silent> gt <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gr :call CocAction('jumpReferences')<CR>
+" nmap <silent> gr <Plug>(coc-references)
+
+" FZF config
+let g:fzf_layout = { 'window': { 'width': 0.7, 'height': 0.6 } }
+let g:fzf_preview_window = ['up:60%', 'ctrl-/']
 
 " highlight config
 let g:highlightedyank_highlight_duration = 100

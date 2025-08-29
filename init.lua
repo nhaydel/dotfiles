@@ -76,8 +76,8 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
   'hiphish/rainbow-delimiters.nvim',
-  -- Colorscheme
   'Olical/conjure',
+  -- Colorscheme
   {
     'AlexvZyl/nordic.nvim',
     lazy = false,
@@ -269,17 +269,22 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
-vim.g["conjure#client#clojure#nrepl_cmd"] = "clj -M:nrepl"
+vim.g["conjure#client#clojure#nrepl_cmd"] = "clj -A:nrepl"
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
+    layout_strategy = "vertical",
+    layout_config = { width = 0.6 },
     mappings = {
       i = {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
       },
     },
+  },
+  pickers = {
+
   },
 }
 
@@ -389,7 +394,7 @@ require("neo-tree").setup({
     commands = {} -- Add a custom command or override a global one using the same function name
   },
   window = {
-    position = "float",
+    position = "right",
     width = 80,
     mapping_options = {
       noremap = true,
@@ -611,7 +616,6 @@ require('gitsigns').setup(
 )
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
-
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
@@ -705,7 +709,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 vim.keymap.set('n', '<leader><leader>', ":Neotree toggle<CR>")
-vim.keymap.set('n', '<leader>b', ":Buffers<CR>")
+vim.keymap.set('n', '<leader>bb', ":Telescope buffers<CR>")
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
@@ -762,7 +766,7 @@ vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = "#e8ad0c"} )
 local servers = {
   gopls = {},
   clangd = {},
-  tsserver = {},
+  ts_ls = {},
   zls = {},
   pyright = {},
   lua_ls = {
@@ -773,13 +777,12 @@ local servers = {
   },
 }
 
-vim.lsp.config('gopls', {})
-vim.lsp.config('zls', {})
-vim.lsp.config('clangd', {})
-vim.lsp.config('pyright', {})
-vim.lsp.config('tsserver', {})
-vim.lsp.config('clojure_lsp', {})
-
+-- vim.lsp.config('gopls', {})
+-- vim.lsp.config('zls', {})
+-- vim.lsp.config('clangd', {})
+-- vim.lsp.config('pyright', {})
+-- vim.lsp.config('ts_ls', {})
+-- vim.lsp.config('clojure_lsp', {})
 -- Setup neovim lua configuration
 require('neodev').setup()
 
