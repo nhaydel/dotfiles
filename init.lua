@@ -86,6 +86,10 @@ require('lazy').setup({
         require('nordic').load()
     end
   },
+  { 'https://gitlab.com/shmerl/neogotham.git',
+    lazy = false, -- to make sure it's loaded on startup
+    priority = 1000, -- to load before other plugins
+  },
   'jiangmiao/auto-pairs',
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -210,7 +214,7 @@ require('lazy').setup({
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
-vim.cmd 'colorscheme nordic'
+vim.cmd 'colorscheme neogotham'
 -- Set highlight on search
 vim.o.hlsearch = false
 
@@ -702,9 +706,9 @@ require('nvim-treesitter.configs').setup {
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 vim.keymap.set('n', '<C-n>', ":tabnew<CR>", { desc = "New tabnext" })
-vim.keymap.set('n', '<C-l>', ":tabn<CR>", { desc = "Go to next tab" })
-vim.keymap.set('n', '<C-j>', ":tabp<CR>", { desc = "Go to previous tab" })
-vim.keymap.set('n', '<C-c>', ":tabclose<CR>", { desc = "Close current tab" })
+vim.keymap.set('n', '<C-l>', ":bn<CR>", { desc = "Go to next tab" })
+vim.keymap.set('n', '<C-j>', ":bp<CR>", { desc = "Go to previous tab" })
+vim.keymap.set('n', '<C-c>', ":bd<CR>", { desc = "Close current tab" })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
