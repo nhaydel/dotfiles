@@ -1,43 +1,70 @@
 {
-    "workbench.colorTheme": "Flate Arc Bold",
-    "files.insertFinalNewline": true,
-    "files.trimTrailingWhitespace": true,
-    "workbench.preferredDarkColorTheme": "Tokyo Night AltSynt",
-    "workbench.statusBar.visible": true,
-    "editor.rulers": [120],
-    "editor.minimap.enabled": false,
-    "editor.lineNumbers": "relative",
+    "workbench.sideBar.location": "right",
     "workbench.editor.enablePreviewFromQuickOpen": false,
-    "workbench.startupEditor": "none",
-    "remote.autoForwardPortsSource": "hybrid",
-    "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "workbench.editor.enablePreview": false,
+    "workbench.activityBar.location": "hidden",
+    "workbench.statusBar.visible": false,
+    "explorer.openEditors.visible": 0,
+    "workbench.editor.showTabs": "single",
+    "workbench.layoutControl.enabled": false,
+    "window.commandCenter": false,
+    "editor.minimap.enabled": false,
+    "workbench.colorTheme": "Gotham",
+    "git.blame.editorDecoration.enabled": true,
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.statusBarColorControl": false,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["<C-n>"],
+            "commands": [":nohl"]
+        },
+        {
+            "before": ["K"],
+            "commands": ["lineBreakInsert"],
+            "silent": true
+        },
+        {
+            "before": ["g", "r"],
+            "commands": ["editor.action.goToReferences"]
+        },
+        {
+            "before": ["g", "d"],
+            "commands": ["editor.action.revealDefinition"]
+        },
+        {
+            "before": ["<C-j>"],
+            "commands": ["workbench.action.previousEditor"]
+        },
+        {
+            "before": ["<C-k>"],
+            "commands": ["workbench.action.nextEditor"]
+        },
+        {
+            "before": ["<leader>", "f"],
+            "commands": ["workbench.action.quickOpen"]
+        },
+        {
+            "before": ["<leader>", "<leader>"],
+            "commands": ["workbench.view.explorer"]
+        },
+        {
+            "before": ["<C-x>"],
+            "commands": ["workbench.action.closeActiveEditor"]
+        }
+    ],
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-f>": false
     },
-    "vim.leader": " ",
-    "vim.statusBarColors.normal": "",
-    "vim.vimrc.enable": true,
-    "vim.highlightedyank.enable": true,
-    "vim.normalModeKeyBindings": [
-        {
-          "before" : ["g","d"],
-          "commands" : [
-            "editor.action.revealDefinition"
-          ]
-        },
-        {
-          "before" : ["g","r"],
-          "commands" : [
-            "editor.action.goToReferences"
-          ]
-        },
-
-      ],
-      "zig.initialSetupDone": true,
-      "zig.path": "zig",
-      "zig.zls.path": "/Users/nic/Library/Application Support/Code/User/globalStorage/ziglang.vscode-zig/zls_install/zls",
-      "telemetry.telemetryLevel": "off",
-      "settingsSync.ignoredExtensions": [
-
-      ],
-      "editor.fontLigatures": false
 }
