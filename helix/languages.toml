@@ -34,10 +34,20 @@ name = "typescript"
 file-types = ["ts"]
 language-servers = [ { name = "efm-lsp-prettier", only-features = [ "format" ] }, "typescript-language-server" ]
 
+[language-server.typescript-language-server.config.typescript]
+# Ensure this setting is present or add it
+# This enables the "Add all missing imports" source action
+code_action_context = { only = ["source.addMissingImports.ts"] }
+
 [[language]]
 name = "zig"
 file-types = ["zig", "zon"]
 language-servers = [ "zls" ]
+
+[[language]]
+name = "haskell"
+file-types = ["hs"]
+language-servers = [ "haskell-language-server-wrapper" ]
 
 [[language]]
 name = "c"

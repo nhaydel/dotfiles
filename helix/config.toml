@@ -1,11 +1,12 @@
-theme = "nightfox"
+
+theme = "autumn_night"
 
 [editor]
 line-number = "relative"
 mouse = true
 bufferline = "always"
 true-color = true
-
+completion-replace = true
 
 [editor.cursor-shape]
 insert = "bar"
@@ -31,6 +32,14 @@ H = "@F)mi("
 # Move to inside the next parenthesis
 L = "@f(mi("
 
+F = "@ma)"
+
+[keys.normal."e"]
+_ = "@ Clojure Repl Commands\n"
+
+e = ":sh zellij action toggle-floating-panes; zellij action write-chars '%{selection}'; zellij action write 13; sleep 2; zellij action toggle-floating-panes"
+r = ":sh zellij action toggle-floating-panes; zellij action write-chars 'clj'; zellij action write 13; sleep 2; zellij action toggle-floating-panes"
+
 [keys.normal."'"]
 
 _ = "@ File Management\n"
@@ -42,8 +51,9 @@ e = "@:sh mkdir <C-r>%"
 w = "@:sh mv <C-r>% <C-r>%"
 c = "@:sh cp <C-r>% <C-r>%"
 
+
 [keys.normal." "]
 
 _ = "@ Commands\n"
 
-"space"="file_explorer_in_current_buffer_directory"
+space="file_explorer_in_current_buffer_directory"

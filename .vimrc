@@ -7,8 +7,11 @@ set mouse=a
 set hlsearch
 set incsearch
 set re=0
+set clipboard=unnamed
 call plug#begin()
 Plug 'preservim/NERDTree' " File nav
+Plug 'PhilRunninger/nerdtree-buffer-ops'
+Plug 'lmeijvogel/nerdtree-copypaste'
 Plug 'zivyangll/git-blame.vim'
 " Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'vv9k/bogster'
@@ -44,7 +47,7 @@ call plug#end()
 " let g:python_highlight_all = 1
 let mapleader = " "
 " KEYMAPPINGS
-nnoremap <space>fw :Rg<CR>
+nnoremap <space>fw :RG<CR>
 nnoremap <space>ff :Files<CR>
 nnoremap <space>bb :Buffers<CR>
 nnoremap <space>cc :IcedConnect<CR>
@@ -57,6 +60,8 @@ let g:iced_enable_default_key_mappings = v:true
 :command IcedRepl !zellij run --floating -- iced repl; zellij action focus-previous-pane
 syntax on
 filetype plugin indent on
+
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!**/.git/*" --glob "!**/node_modules/*" --glob "!.gitignore"'
 
 let g:python_highlight_all = 1
 set completeopt=menu,menuone,popup,noselect,noinsert

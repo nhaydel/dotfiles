@@ -42,7 +42,7 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.vimspector_enable_mappings='HUMAN'
-vim.opt.showtabline = 0
+vim.opt.showtabline = 1
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -641,7 +641,7 @@ vim.keymap.set('n', '<leader>vt', ":call vimspector#ToggleBreakpoint()<cr>", { d
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'clojure', 'go', 'lua', 'python', 'zig', 'tsx', 'typescript', 'vimdoc', 'vim', 'json' },
+  ensure_installed = { 'clojure', 'go', 'lua', 'python', 'c', 'zig', 'tsx', 'typescript', 'vimdoc', 'vim', 'json' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -706,9 +706,9 @@ require('nvim-treesitter.configs').setup {
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 vim.keymap.set('n', '<C-n>', ":tabnew<CR>", { desc = "New tabnext" })
-vim.keymap.set('n', '<C-l>', ":bn<CR>", { desc = "Go to next tab" })
-vim.keymap.set('n', '<C-j>', ":bp<CR>", { desc = "Go to previous tab" })
-vim.keymap.set('n', '<C-c>', ":bd<CR>", { desc = "Close current tab" })
+vim.keymap.set('n', '<C-l>', ":tabnext<CR>", { desc = "Go to next tab" })
+vim.keymap.set('n', '<C-j>', ":tabp<CR>", { desc = "Go to previous tab" })
+vim.keymap.set('n', '<C-c>', ":tabclose<CR>", { desc = "Close current tab" })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
