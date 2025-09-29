@@ -32,7 +32,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-monokai-pro)
+(setq doom-theme 'gotham)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -46,11 +46,6 @@
 (after! lsp-ui
   (setq lsp-ui-doc-enable t)  ; Enable documentation popups
   (setq lsp-ui-sideline-enable t)) ;Enable sideline features
-(setq lsp-clojure-server-command nil)
-(after! cider
-  (setq cider-show-error-buffer t)
-  (setq clojure-indent-style 'align-arguments
-   clojure-align-forms-automatically t))
 ;; Add other lsp-ui customizations here as needed)
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -74,38 +69,6 @@
 ;;   this file. Emacs searches the `load-path' when you load packages with
 ;;   `require' or `use-package'.
 ;; - `map!' for binding new keys
-(use-package! cider
-  :after clojure-mode
-  :config
-  (setq cider-show-error-buffer t               ;'only-in-repl
-        cider-font-lock-dynamically nil         ; use lsp semantic tokens
-        cider-eldoc-display-for-symbol-at-point nil ; use lsp
-        cider-prompt-for-symbol nil
-        cider-use-xref nil                      ; use lsp
-        cider-repl-pop-to-buffer-on-connect nil ; REPL buffer shown at starup
-        clojure-enable-kaocha-runner t          ; enable Kaocha test runner
-        cider-repl-display-help-banner nil      ; disable help banner
-        cider-print-fn 'puget                   ; pretty printing with sorted keys / set values
-        cider-result-overlay-position 'at-point ; results shown right after expression
-        cider-overlays-use-font-lock t
-        cider-repl-buffer-size-limit 100        ; limit lines shown in REPL buffer
-        cider-repl-history-size 42
-        )
-
-  (set-lookup-handlers! '(cider-mode cider-repl-mode) nil) ; use lsp
-  (set-popup-rule! "*cider-test-report*" :side 'right :width 0.4)
-  (set-popup-rule! "^\\*cider-repl" :side 'bottom :quit nil)
-  ;; use lsp completion
-  (add-hook 'cider-mode-hook (lambda () (remove-hook 'completion-at-point-functions #'cider-complete-at-point))))
-
-
-(use-package! clojure-mode
-  :config
-  (setq clojure-indent-style 'align-arguments
-        clojure-align-forms-automatically t
-        clojure-toplevel-inside-comment-form t  ;; evaluate expressions in comment as top level
-
-))
 ;; To get information about any of these functions/macros, move the cursor over
 ;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
 ;; This will open documentation for it, including demos of how they are used.
