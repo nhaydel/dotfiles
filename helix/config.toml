@@ -35,10 +35,11 @@ L = "@f(mi("
 F = "@ma)"
 
 [keys.normal."e"]
-_ = "@ Clojure Repl Commands\n"
 
-e = ":sh zellij action toggle-floating-panes; zellij action write-chars '%{selection}'; zellij action write 13; sleep 2; zellij action toggle-floating-panes"
-r = ":sh zellij action toggle-floating-panes; zellij action write-chars 'clj'; zellij action write 13; sleep 2; zellij action toggle-floating-panes"
+_ = "@ Clojure repl commands"
+
+r = ":sh tmux split-window -p 20 -hf 'clj'\n"
+e = ":sh tmux send-keys -t right \"%{selection}\"; tmux send-keys -t right Enter"
 
 [keys.normal."'"]
 
