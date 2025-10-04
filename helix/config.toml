@@ -41,6 +41,8 @@ _ = "@ Clojure repl commands"
 r = ":sh tmux split-window -p 20 -hf 'clj'\n"
 # e = ":sh tmux send-keys -t right -l \" %{selection} \"; tmux send-keys -t right Enter"
 e = ":pipe-to ./tmux-pipe.sh"
+t = ":sh tmux split-window -p 20 -hf"
+
 [keys.normal."'"]
 
 _ = "@ File Management\n"
