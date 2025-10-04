@@ -1,5 +1,5 @@
 
-theme = "autumn_night"
+theme = "hex_toxic"
 
 [editor]
 line-number = "relative"
@@ -39,8 +39,8 @@ F = "@ma)"
 _ = "@ Clojure repl commands"
 
 r = ":sh tmux split-window -p 20 -hf 'clj'\n"
-e = ":sh tmux send-keys -t right \"%{selection}\"; tmux send-keys -t right Enter"
-
+# e = ":sh tmux send-keys -t right -l \" %{selection} \"; tmux send-keys -t right Enter"
+e = ":pipe-to ./tmux-pipe.sh"
 [keys.normal."'"]
 
 _ = "@ File Management\n"
