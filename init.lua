@@ -61,6 +61,10 @@ vim.wo.number = true
 vim.opt.rtp:prepend(lazypath)
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.o.tabstop = 4 -- A TAB character looks like 4 spaces
+vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
+vim.o.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
+vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
 -- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
 --
@@ -82,10 +86,16 @@ require('lazy').setup({
     'AlexvZyl/nordic.nvim',
     lazy = false,
     priority = 1000,
-    config = function()
-        require('nordic').load()
-    end
   },
+  { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true, opts = ...},
+  {
+	"rose-pine/neovim",
+	name = "rose-pine",
+	config = function()
+	  vim.cmd("colorscheme rose-pine")
+	end
+  },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   { 'https://gitlab.com/shmerl/neogotham.git',
     lazy = false, -- to make sure it's loaded on startup
     priority = 1000, -- to load before other plugins
@@ -214,7 +224,7 @@ require('lazy').setup({
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
-vim.cmd 'colorscheme neogotham'
+vim.cmd 'colorscheme retrobox'
 -- Set highlight on search
 vim.o.hlsearch = false
 
@@ -637,6 +647,7 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>fw', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>vt', ":call vimspector#ToggleBreakpoint()<cr>", { desc = 'Toggle [B]reakpoint' })
+vim.keymap.set('n', '<leader>tt', ":!tmux split-window -p 40 -hf<cr>", { desc = 'Open Terminal' })
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
