@@ -13,6 +13,7 @@ Plug 'preservim/NERDTree' " File nav
 Plug 'PhilRunninger/nerdtree-buffer-ops'
 Plug 'lmeijvogel/nerdtree-copypaste'
 Plug 'zivyangll/git-blame.vim'
+Plug 'psliwka/vim-smoothie'
 " Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'vv9k/bogster'
 Plug 'whatyouhide/vim-gotham'
@@ -42,14 +43,14 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 Plug 'guns/vim-sexp',    {'for': 'clojure'}
 Plug 'liquidz/vim-iced', {'for': 'clojure'}
 call plug#end()
-:set showtabline=0
+:set showtabline=1
 
 " let g:python_highlight_all = 1
 let mapleader = " "
 " KEYMAPPINGS
 nnoremap <space>fw :RG<CR>
 nnoremap <space>ff :Files<CR>
-nnoremap <space>bb :Buffers<CR>
+nnoremap <space>bb :Tabs<CR>
 nnoremap <space>cc :IcedConnect<CR>
 nnoremap gb :<C-u>call gitblame#echo()<CR>
 " END KEYMAPPINGS
@@ -99,10 +100,10 @@ set shiftwidth=4
 set expandtab
 
 " tab controls
-map  <C-k> :bn<CR>
-map  <C-c> :bd<CR>
+map  <C-k> :tabnext<CR>
+map  <C-x> :tabclose<CR>
 map  <C-t> :term<CR>
-map  <C-j> :bp<CR>
+map  <C-j> :tabprevious<CR>
 map  <C-n> :tabnew<CR>
 map  <C-v> :vsp<CR>
 map  <C-b> :vertical resize +1<CR>
@@ -122,10 +123,10 @@ endfunction
 let g:NERDTreeQuitOnOpen = 1
 nnoremap <space><space> :call MyNerdToggle()<CR>
 let g:NERDTreeWinSize=80
- let g:NERDTreeWinPos = "right"
+let g:NERDTreeWinPos = "right"
 
 hi Pmenu ctermfg=white ctermbg=black gui=NONE guifg=white guibg=black
-set pastetoggle=<F3>
+" set pastetoggle=<F3>
 
 let g:vimspector_enable_mappings = 'HUMAN'
 set updatetime=100
@@ -135,7 +136,7 @@ set laststatus=2
 
 " Colors
 set background=dark
-colorscheme gotham
+colorscheme retrobox
 set termguicolors
 
 let g:ctrlp_working_path_mode = 'ra'
@@ -152,6 +153,7 @@ nmap <silent> gd :call CocAction('jumpDefinition', 'tabe')<CR>
 nmap <silent> gt <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr :call CocAction('jumpReferences')<CR>
+nmap <silent> tt :command CocAction('jumpReferences')<CR>
 " nmap <silent> gr <Plug>(coc-references)
 
 " FZF config
