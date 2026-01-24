@@ -1,20 +1,72 @@
-
-theme = "gotham"
+# Config for use with helix built from https://github.com/gj1118/helix
+theme = "gruvbox_dark_hard"
 
 [editor]
 line-number = "relative"
 mouse = true
-bufferline = "always"
-true-color = true
 completion-replace = true
+rainbow-brackets = true
+max-panel-width = 120
+max-panel-height = 120
+welcome-screen = true
+picker-symbol=" ↪ "
+rounded-corners = true
+rulers = [120]
+gutters = ["diff", "spacer", "diagnostics", "line-numbers", "spacer"]
+undercurl = true
+cursorline = true
+end-of-line-diagnostics = "hint"
+true-color = true
+
+[editor.bufferline]
+render-mode = "multiple"
+separator = "|"
+
+[editor.inline-blame]
+# Show inline blame on specific lines (default: "never")
+# Options: "cursor-line", "all", "never"
+show = "cursor-line"
+
+# Format string for blame display
+# Available placeholders: {author}, {commit}, {time-ago}, {title}
+format = "{author} • {time-ago} • {title}"
+
+# Auto-fetch blame information (default: false)
+auto-fetch = false
+
+[editor.cmdline]
+style = "popup"
+use-full-height = true
+
+[editor.statusline]
+left = [
+  "mode",
+  "version-control",
+  "file-name",
+  "function-name",
+]
+center = []
+right = [
+  "spinner",
+  "separator",
+  "diagnostics",
+  "position-percentage",
+  "position",
+  "selections",
+  "file-type",
+  "file-encoding",
+  "file-line-ending",
+  "mode",
+]
+separator = "|"
 
 [editor.cursor-shape]
-insert = "bar"
+insert = "block"
 normal = "block"
 select = "underline"
 
 [editor.file-picker]
-hidden = false
+hidden = true
 
 [keys.normal]
 C-r = ":config-reload" # Maps Ctrl-o to opening of the helix config file
@@ -38,10 +90,14 @@ F = "@ma)"
 
 _ = "@ Clojure repl commands"
 
-r = ":sh tmux split-window -p 20 -hf 'clj'\n"
+r = ":sh tmux split-window -p 30 -hf 'clj'\n"
 # e = ":sh tmux send-keys -t right -l \" %{selection} \"; tmux send-keys -t right Enter"
 e = ":pipe-to ./tmux-pipe.sh"
-t = ":sh tmux split-window -p 20 -hf"
+
+[keys.normal."t"]
+
+_ = "@ Terminal commands"
+t = ":sh tmux split-window -p 40 -hf"
 
 [keys.normal."'"]
 
