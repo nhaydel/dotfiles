@@ -1,11 +1,10 @@
-keybind = ctrl+a>n=new_tab
-keybind = ctrl+a>x=close_tab
-keybind = ctrl+a>right=next_tab
-keybind = ctrl+a>left=previous_tab
-keybind = ctrl+a>v=new_split:right
-keybind = ctrl+a>h=new_split:down
-keybind = alt+left=goto_split:left
-keybind = alt+right=goto_split:right
-keybind = alt+up=goto_split:up
-keybind = alt+down=goto_split:down
+keybind = ctrl+e>n=new_tab
+keybind = ctrl+e>x=close_tab
+keybind = ctrl+e>right=next_tab
+keybind = ctrl+e>left=previous_tab
+keybind = ctrl+e>v=new_split:right
+keybind = ctrl+e>h=new_split:down
 
+font-family = "Courier New Bold"
+# theme = "Gruvbox Dark Hard"
+theme = "Solarized Osaka Night"

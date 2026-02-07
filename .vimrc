@@ -8,20 +8,13 @@ set hlsearch
 set incsearch
 set re=0
 set clipboard=unnamed
+
 call plug#begin()
 Plug 'preservim/NERDTree' " File nav
 Plug 'PhilRunninger/nerdtree-buffer-ops'
 Plug 'lmeijvogel/nerdtree-copypaste'
 Plug 'zivyangll/git-blame.vim'
 Plug 'psliwka/vim-smoothie'
-" Plug 'kaicataldo/material.vim', { 'branch': 'main' }
-Plug 'vv9k/bogster'
-Plug 'whatyouhide/vim-gotham'
-" Plug 'audibleblink/hackthebox.vim'
-" Requires adapter installs:
-" :VimspectorInstall debugpy - for python
-" :VimspectorInstall delve - for go
-" :VimspectorInstall CodeLLDB
 Plug 'machakann/vim-highlightedyank' " Highlight on copy
 Plug 'skammer/vim-css-color' " View css color codes
 Plug 'puremourning/vimspector'
@@ -42,6 +35,9 @@ Plug 'vim-python/python-syntax'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'guns/vim-sexp',    {'for': 'clojure'}
 Plug 'liquidz/vim-iced', {'for': 'clojure'}
+
+" Colorschemes
+Plug 'webhooked/kanso.nvim'
 call plug#end()
 :set showtabline=1
 
@@ -58,7 +54,7 @@ nnoremap gb :<C-u>call gitblame#echo()<CR>
 " ICED setup
 let g:iced_enable_default_key_mappings = v:true
 :command Clay IcedEval (require '[scicloj.clay.v2.api :as clay]) (clay/make! {:source-path "notebooks/index.clj"})
-:command IcedRepl !zellij run --floating -- iced repl; zellij action focus-previous-pane
+:command IcedRepl :silent !tmux split-window -h -d "iced repl"; tmux resize-pane -Z;
 syntax on
 filetype plugin indent on
 
@@ -83,15 +79,12 @@ let g:ale_python_flake8_options = '--ignore=E501,E402,F401,E701' " ignore long-l
 let g:ale_python_autopep8_options = '--ignore=E501'              " ignore long-lines for autopep8 fixer
 let g:ale_yaml_yamllint_options='-d "{extends: relaxed, rules: {line-length: disable}}"'
 
-" let g:airline#extensions#ale#enabled = 1
 let g:ale_sign_warning = "\uf421" "  
 let g:ale_sign_error = "\uf658" "  
 
 let g:ale_echo_msg_format = '[%linter%] %code%: %s'
 let g:rainbow_active = 1 
 
-" tab spacing
-filetype plugin indent on
 " show existing tab with 4 spaces width
 set tabstop=4
 " when indenting with '>', use 4 spaces width
@@ -126,17 +119,13 @@ let g:NERDTreeWinSize=80
 let g:NERDTreeWinPos = "right"
 
 hi Pmenu ctermfg=white ctermbg=black gui=NONE guifg=white guibg=black
-" set pastetoggle=<F3>
 
 let g:vimspector_enable_mappings = 'HUMAN'
 set updatetime=100
 
-" StatusLine
-set laststatus=2
-
 " Colors
 set background=dark
-colorscheme retrobox
+colorscheme sorbet
 set termguicolors
 
 let g:ctrlp_working_path_mode = 'ra'
@@ -144,7 +133,7 @@ let g:ctrlp_map = '<c-f>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " Coc config
-let g:coc_global_extensions = ['coc-zig', 'coc-json', 'coc-go', 'coc-tsserver', 'coc-clangd', 'coc-clojure', 'coc-pyright']
+let g:coc_global_extensions = ['coc-json', 'coc-go', 'coc-tsserver', 'coc-clangd', 'coc-clojure', 'coc-pyright']
 let g:coc_disable_startup_warning = 1
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
@@ -164,6 +153,7 @@ let g:fzf_preview_window = ['up:60%', 'ctrl-/']
 let g:highlightedyank_highlight_duration = 100
 
 " StatusLine
+set laststatus=2
 function! UpdateGitBranch()
   let l:string = system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
   return strlen(l:string) > 0?'['.l:string.']':''
