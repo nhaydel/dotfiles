@@ -7,4 +7,5 @@ keybind = ctrl+e>h=new_split:down
 
 font-family = "Courier New Bold"
 # theme = "Gruvbox Dark Hard"
-theme = "Solarized Osaka Night"
+# theme = "Iceberg Dark"
+theme = "Ayu"

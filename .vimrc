@@ -8,7 +8,7 @@ set hlsearch
 set incsearch
 set re=0
 set clipboard=unnamed
-
+set noswapfile
 call plug#begin()
 Plug 'preservim/NERDTree' " File nav
 Plug 'PhilRunninger/nerdtree-buffer-ops'
@@ -37,7 +37,9 @@ Plug 'guns/vim-sexp',    {'for': 'clojure'}
 Plug 'liquidz/vim-iced', {'for': 'clojure'}
 
 " Colorschemes
-Plug 'webhooked/kanso.nvim'
+Plug 'morhetz/gruvbox'
+Plug 'cocopon/iceberg.vim'
+Plug 'ayu-theme/ayu-vim'
 call plug#end()
 :set showtabline=1
 
@@ -125,7 +127,8 @@ set updatetime=100
 
 " Colors
 set background=dark
-colorscheme sorbet
+let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
 set termguicolors
 
 let g:ctrlp_working_path_mode = 'ra'
