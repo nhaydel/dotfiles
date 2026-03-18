@@ -40,6 +40,7 @@ Plug 'liquidz/vim-iced', {'for': 'clojure'}
 Plug 'morhetz/gruvbox'
 Plug 'cocopon/iceberg.vim'
 Plug 'ayu-theme/ayu-vim'
+Plug 'flazz/vim-colorschemes'
 call plug#end()
 :set showtabline=1
 
@@ -128,7 +129,7 @@ set updatetime=100
 " Colors
 set background=dark
 let ayucolor="dark"   " for dark version of theme
-colorscheme ayu
+colorscheme deus
 set termguicolors
 
 let g:ctrlp_working_path_mode = 'ra'
